@@ -1,18 +1,24 @@
 package caesar;
 
+import huffman.HuffmanUtil;
+
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Enter username");
+        System.out.println("Enter a phrase to be encrypted and encoded");
 
         String userName = myObj.nextLine();
-        String encoded = getCypher(userName, true);
+        String encrypted = getCypher(userName, true);
         System.out.println(encoded);
 
         String decoded = getCypher(encoded, false);
         System.out.println(decoded);
+
+        HuffmanUtil huffUtil = new HuffmanUtil();
+        String huffEncoded = huffUtil.encode(encoded);
+        System.out.println("Huffman encoded => " + huffEncoded);
     }
 
     public static String getCypher(String text, boolean cypher){
