@@ -2,28 +2,47 @@ package caesar;
 
 import huffman.HuffmanUtil;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Enter a phrase to be encrypted and encoded");
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner userScanner = new Scanner(System.in);
+        System.out.println("Enter your Caesar key");
+        int key = Integer.parseInt(userScanner.nextLine());
 
-        String userName = myObj.nextLine();
-        String encrypted = getCypher(userName, true);
-        System.out.println(encoded);
+        String path = System.getProperty("user.dir");
+        String filePath = Paths.get(path,  "text.txt").toString();
 
-        String decoded = getCypher(encoded, false);
-        System.out.println(decoded);
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+
+        String text = "";
+
+        while (sc.hasNextLine()) {
+            text += sc.nextLine();
+        }
+
+        System.out.println(text);
+
+        String encrypted = getCypher(text, key, true);
+        System.out.println("\nEncrypted string: " + encrypted);
+
+//        String decoded = getCypher(encrypted, false);
+//        System.out.println(decoded);
 
         HuffmanUtil huffUtil = new HuffmanUtil();
-        String huffEncoded = huffUtil.encode(encoded);
-        System.out.println("Huffman encoded => " + huffEncoded);
+        String huffEncoded = huffUtil.encode(encrypted);
+        System.out.println("\nHuffman encoded => " + huffEncoded);
+        System.out.println("Huffman encoded size: " + huffEncoded.length() + " bits");
+        System.out.println("String size without Huffman: " + encrypted.length()*4 + " bits");
+
     }
 
-    public static String getCypher(String text, boolean cypher){
+    public static String getCypher(String text, int key, boolean cypher){
         // cypher based on ascii table from 32 to 127
-        int key = 1;
         int size = text.length();
 
         String encoded = "";

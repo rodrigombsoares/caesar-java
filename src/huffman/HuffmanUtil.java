@@ -10,15 +10,6 @@ public class HuffmanUtil {
     private static Map<Character, String> charPrefixHashMap = new HashMap<>();
     static HuffmanNode root;
 
-//    public static void main(String[] args) {
-//
-//        String test = "AAABCCCDadsa1%$^";
-//        System.out.println("Original Text = "+test);
-//        String s = encode(test);
-//        decode(s);
-//
-//    }
-
     private static HuffmanNode buildTree(Map<Character, Integer> freq) {
 
         PriorityQueue<HuffmanNode> priorityQueue = new PriorityQueue<>();
@@ -86,11 +77,11 @@ public class HuffmanUtil {
             freq.put(test.charAt(i), freq.get(test.charAt(i)) + 1);
         }
 
-        System.out.println("Character Frequency Map = " + freq);
+        System.out.println("Char frequency => " + freq);
         root = buildTree(freq);
 
         setPrefixCodes(root, new StringBuilder());
-        System.out.println("Character Prefix Map = " + charPrefixHashMap);
+        System.out.println("Char map => " + charPrefixHashMap);
         StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < test.length(); i++) {
