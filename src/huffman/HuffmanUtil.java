@@ -77,7 +77,7 @@ public class HuffmanUtil {
             freq.put(test.charAt(i), freq.get(test.charAt(i)) + 1);
         }
 
-        System.out.println("Char frequency => " + freq);
+        System.out.println("\nChar frequency => " + freq);
         root = buildTree(freq);
 
         setPrefixCodes(root, new StringBuilder());
